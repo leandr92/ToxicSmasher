@@ -13,26 +13,6 @@ print("connected")
 
 
 # Обработчик новых сообщений
-# @client.on(events.ChatAction(chats=SOURCE_CHANNEL))
-# async def handler_chat_action(event):
-#     try:
-        # отправим сообщение в наш канал
-        # await client.send_message(TARGET_CHANNEL, event.message)
-        # либо вместо переотправки можно репостнуть:
-        # await client.forward_messages(TARGET_CHANNEL, event.message)
-        # await event.respond(r'¯\_(ツ)_/¯')
-        # print(event)
-        # phrase = random.choice(phrases)
-        # if event.message.from_id.user_id == 395989767:
-        #     print(event.message)
-        # if event.message.from_id.user_id == 5267570850:
-        #     print(event.message)
-        # if event.message.from_id.user_id ==682060469:
-        #     client(SendMessageRequest(client.get_entity(SOURCE_CHANNEL), phrase,))
-
-    # except Exception as e:
-    #     print(e)
-
 @client.on(events.NewMessage(chats=SOURCE_CHANNEL))
 async def handler_new_message(event):
 
@@ -81,22 +61,12 @@ async def handler_new_message(event):
     ]
     minutes10 = timedelta(minutes=10)
     try:
-        # отправим сообщение в наш канал
-        # await client.send_message(TARGET_CHANNEL, event.message)
-        # либо вместо переотправки можно репостнуть:
-        # await client.forward_messages(TARGET_CHANNEL, event.message)
-        # await event.respond(r'¯\_(ツ)_/¯')
-
-        if datetime.now() >= client.message_last_time + minutes10:
+           if datetime.now() >= client.message_last_time + minutes10:
 
             phrase = random.choice(phrases)
             if event.message.from_id.user_id == 395989767:
                 print(phrase)
-                # print(event.message)
-            # if event.message.from_id.user_id == 5267570850:
-                # print(event.message)
             if event.message.from_id.user_id == 682060469:
-                # print(phrase)
                 result = await client(SendMessageRequest(await client.get_entity(SOURCE_CHANNEL), phrase,
                                                          reply_to_msg_id=event.message.id))
                 client.message_last_time = datetime.now()
